@@ -4,17 +4,22 @@ function FileUpload() {
   const [file, setSelectedFile] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const selecredFiles = new FormData();
-    selecredFiles.append("file", file);
-    const res = await axios.post(
-      import.meta.env.VITE_BASE_URL + "/file",
-      selecredFiles,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const selectedFiles = new FormData();
+    selectedFiles.append("file", file);
+    console.log(selectedFiles)
+    try {
+      const res = await axios.post(
+        import.meta.env.VITE_BASE_URL + "/file",
+        selectedFiles,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
